@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vietnam Flag</title>
+</head>
+<body>
+<canvas id="flagCanvas" width="300" height="200"></canvas>
+
+<script>
+        const canvas = document.getElementById('flagCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Kích thước của lá cờ
+        const flagWidth = canvas.width;
+        const flagHeight = canvas.height;
+
+        // Vẽ hình chữ nhật nền đỏ
+        ctx.fillStyle = 'red';
+        ctx.fillRect(0, 0, flagWidth, flagHeight);
+
+        // Hàm vẽ ngôi sao vàng
+        function drawStar(centerX, centerY, radius) {
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY - radius);  // Điểm đầu tiên (trên cùng của ngôi sao)
+
+            for (let i = 0; i < 5; i++) {
+                // Tính toán điểm ngoài của ngôi sao
+                let outerAngle = i * 2 * Math.PI / 5 - Math.PI / 2;
+                let innerAngle = (i + 0.5) * 2 * Math.PI / 5 - Math.PI / 2;
+
+                // Điểm ngoài
+                ctx.lineTo(centerX + radius * Math.cos(outerAngle),
+                           centerY + radius * Math.sin(outerAngle));
+                // Điểm trong
+                ctx.lineTo(centerX + (radius / 2.5) * Math.cos(innerAngle),
+                           centerY + (radius / 2.5) * Math.sin(innerAngle));
+            }
+
+            ctx.closePath();
+            ctx.fillStyle = 'yellow';
+            ctx.fill();
+        }
+
+        // Vẽ ngôi sao vàng ở giữa cờ
+        drawStar(flagWidth / 2, flagHeight / 2, flagHeight / 3);
+
+    </script>
+</body>
+</html>
